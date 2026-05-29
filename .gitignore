@@ -1,0 +1,22 @@
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos comprimidos y respaldos
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.sql
+
+# Logs
+*.log
+error_log
+
+# Entornos de desarrollo e IDEs
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
