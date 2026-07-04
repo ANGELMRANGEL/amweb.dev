@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV — Angel Miguel Rangel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --accent: #1e40af;
+            --border: #e2e8f0;
+            --bg-body: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 40px 20px;
+        }
+
+        .cv-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 50px 60px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            position: relative;
+        }
+
+        /* Botón Flotante para Generar PDF */
+        .btn-print-container {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-print {
+            background-color: var(--accent);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(30, 64, 175, 0.2);
+            transition: background-color 0.2s;
+        }
+
+        .btn-print:hover {
+            background-color: #1e3a8a;
+        }
+
+        /* Cabecera */
+        header {
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+
+        .title-subtitle {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .contact-info a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+
+        /* Secciones */
+        section {
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+
+        p.profile-text {
+            font-size: 14px;
+            color: var(--text-main);
+            text-align: justify;
+        }
+
+        /* Habilidades */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .skills-category strong {
+            display: block;
+            font-size: 13px;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .skills-category span {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Experiencia & Proyectos */
+        .job-item {
+            margin-bottom: 20px;
+        }
+
+        .job-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .job-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .job-company {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .job-date {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .job-details {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .job-details li {
+            font-size: 13.5px;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            position: relative;
+            padding-left: 12px;
+        }
+
+        .job-details li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Educación */
+        .edu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .edu-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .edu-institution {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .edu-date {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* --- ESTILOS EXCLUSIVOS PARA IMPRESIÓN --- */
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                padding: 0;
+            }
+
+            .cv-container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .btn-print-container {
+                display: none !important;
+            }
+
+            /* Forzar salto de página si fuera necesario */
+            section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del Botón de Impresión -->
+    <div class="btn-print-container">
+        <button class="btn-print" onclick="window.print()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Crear PDF
+        </button>
+    </div>
+
+    <!-- Contenedor del CV -->
+    <div class="cv-container">
+        <header>
+            <h1>Angel Miguel Rangel</h1>
+            <div class="title-subtitle">Frontend Developer | UI & Logic Specialist</div>
+            <div class="contact-info">
+                <span>📍 Maracay, Venezuela</span>
+                <span>🔗 <a href="https://amweb.dev" target="_blank">amweb.dev</a></span>
+                <span>✉️ <a href="mailto:angelmrangel@gmail.com">angelmrangel@gmail.com</a></span>
+                <span>🐙 <a href="https://github.com/angelmrangel" target="_blank">github.com/angelmrangel</a></span>
+            </div>
+        </header>
+
+        <section id="profile">
+            <h2>Profile</h2>
+            <p class="profile-text">
+                Highly logical Frontend Developer with a unique background in Graphic Design and Systems Engineering. Specializes in building pixel-perfect, responsive user interfaces using React and TypeScript, backed by a strong capability to design and integrate robust backends, databases, and AI-driven workflows. Adept at leveraging modern AI tools and agents to accelerate full-stack delivery and build highly optimized web applications.
+            </p>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skills-category">
+                    <strong>Frontend Development</strong>
+                    <span>React.js, TypeScript, JavaScript (ES6+), CSS3, Tailwind CSS, HTML5</span>
+                </div>
+                <div class="skills-category">
+                    <strong>Backend & Databases</strong>
+                    <span>PHP, Python, MySQL, Supabase, Firebase, RESTful APIs</span>
+                </div>
+                <div class="skills-category">
+                    <strong>Tools & Workflows</strong>
+                    <span>Git / GitHub, AI Agent Integration, Vite, Webpack, Responsive Design</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Professional Experience</h2>
+
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">Independent Software Developer</span> | 
+                        <span class="job-company">Freelance / AM Web</span>
+                    </div>
+                    <span class="job-date">2024 - Present</span>
+                </div>
+                <ul class="job-details">
+                    <li><strong>Interactive Portfolio (amweb.dev):</strong> Developed a premium OS-style portfolio app mimicking a terminal and finder system to demonstrate advanced frontend and styling skills.</li>
+                    <li><strong>PizzaOn & LF Club (lafelicitta.com):</strong> Built a real-time interactive e-commerce application for custom pizza configuration and a customer loyalty club interface.</li>
+                    <li><strong>Pastores Alvarez CRM:</strong> Designed and implemented a custom CRM and internal process management system, optimizing business data flows and admin controls.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">Software Developer</span> | 
+                        <span class="job-company">Don Divino Internacional</span>
+                    </div>
+                    <span class="job-date">2021 - 2024</span>
+                </div>
+                <ul class="job-details">
+                    <li>Maintained and upgraded internal web systems and business platforms.</li>
+                    <li>Designed database schemas and optimized SQL queries using PHP and MySQL.</li>
+                    <li>Implemented clean interactive elements using vanilla JS, HTML, and CSS, ensuring cross-browser compatibility and legacy system stability.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="edu-item">
+                <div>
+                    <span class="edu-title">Graphic Design Degree</span>
+                    <span class="edu-institution">— IUTAR</span>
+                </div>
+                <span class="edu-date">Graduated 2012</span>
+            </div>
+            <div class="edu-item">
+                <div>
+                    <span class="edu-title">Systems Engineering Studies (2 Years Completed)</span>
+                    <span class="edu-institution">— Universidad de Carabobo</span>
+                </div>
+                <span class="edu-date">2006 - 2008</span>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+# ----------------------------------------------------------------------
+# Opción para deshabilitar el listado de directorios
+# ----------------------------------------------------------------------
+# Esto evita que los visitantes puedan ver el contenido de las carpetas
+# si no hay un archivo "index" dentro de ellas.
+Options -Indexes
+
+Redirect 301 /piacere2/ https://www.lafelicitta.com/piacere/index.html
+Redirect 301 /piacere2/index.html https://www.lafelicitta.com/piacere/index.html
+
+AddType application/manifest+json .webmanifest
+
+
+
+</IfModule>
+

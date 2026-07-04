@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRESUPUESTO 67</title>
+    <meta name="description" content="PLATAFORMAS TECNOLÓGICAS A TU MEDIDA">
+    <meta property="og:title" content="PRESUPUESTO 67">
+    <meta property="og:description" content="PLATAFORMAS TECNOLÓGICAS A TU MEDIDA">
+    <meta property="og:image" content="https://amweb.vip/cotizaciones/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --azul: #1d2a6b;
+            --blanco: #ffffff;
+            --gris: #f4f5f8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--blanco);
+            color: var(--azul);
+            height: 100dvh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Contenedor de Slides */
+        .slides-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            height: 100%;
+            width: 100%;
+        }
+
+        .slide {
+            scroll-snap-align: start;
+            min-height: 100dvh;
+            max-height: 100dvh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.2rem 1.2rem 1.2rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Estilos Slide 1: Portada (Azul) */
+        .slide-portada {
+            background-color: var(--azul);
+            color: var(--blanco);
+        }
+
+        .logo-portada {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 3rem;
+            text-align: right;
+        }
+
+        .logo-portada i {
+            margin-right: 0.5rem;
+            font-size: 2.4rem;
+        }
+
+        .info-portada {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-label {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .meta-value {
+            font-weight: 400;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        /* Estilos Generales Slides de Contenido (Fondo Blanco) */
+        .slide-content {
+            background-color: var(--blanco);
+            color: var(--azul);
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--azul);
+            padding-bottom: 0.3rem;
+        }
+
+        .slide-logo {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 2rem;
+            text-decoration: none;
+            color: var(--azul);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .slide-tag {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 1.1rem;
+            background-color: var(--azul);
+            color: var(--blanco);
+            padding: 0.1rem 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0.8rem 0;
+            gap: 0.6rem;
+            overflow: hidden;
+        }
+
+        .slide-title {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        /* Módulos */
+        .module-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .module-card {
+            border: 2px solid var(--azul);
+            padding: 0.5rem 0.8rem;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+
+        .module-card-icon {
+            font-size: 1rem;
+            margin-top: 0.1rem;
+        }
+
+        .module-card-content {
+            flex: 1;
+        }
+
+        .module-name {
+            font-weight: 800;
+            font-size: 0.85rem;
+            margin-bottom: 0.1rem;
+            text-transform: uppercase;
+        }
+
+        .module-desc {
+            font-size: 0.72rem;
+            opacity: 0.9;
+            line-height: 1.25;
+        }
+
+        /* Detalles Técnicos y Presupuesto */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .tech-badge {
+            border: 1px solid var(--azul);
+            padding: 0.3rem;
+            font-size: 0.7rem;
+            text-align: center;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.72rem;
+            margin-top: 0.2rem;
+        }
+
+        .budget-table th {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 1.1rem;
+            text-align: left;
+            background: var(--azul);
+            color: var(--blanco);
+            padding: 0.3rem;
+        }
+
+        .budget-table td {
+            padding: 0.3rem;
+            border-bottom: 1px solid rgba(29, 42, 107, 0.2);
+        }
+
+        .budget-table tr:last-child td {
+            font-weight: 800;
+            border-bottom: 2px solid var(--azul);
+        }
+
+        .price-col {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Términos */
+        .terms-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 52dvh;
+            overflow-y: auto;
+            padding-right: 0.2rem;
+        }
+
+        .terms-block {
+            border-left: 2px solid var(--azul);
+            padding-left: 0.6rem;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+
+        .terms-icon {
+            font-size: 0.95rem;
+            margin-top: 0.1rem;
+        }
+
+        .terms-content {
+            flex: 1;
+        }
+
+        .terms-title {
+            font-weight: 800;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            margin-bottom: 0.1rem;
+        }
+
+        .terms-text {
+            font-size: 0.68rem;
+            line-height: 1.35;
+            opacity: 0.95;
+        }
+
+        /* Navegación Fija */
+        .nav-controls {
+            position: fixed;
+            bottom: 1.2rem;
+            right: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            z-index: 250;
+        }
+
+        .nav-btn {
+            background-color: var(--azul);
+            color: var(--blanco);
+            border: 2px solid var(--blanco);
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--blanco);
+            color: var(--azul);
+            border-color: var(--azul);
+        }
+
+        /* Indicador de progreso / Slide indicator */
+        .slide-dots {
+            position: fixed;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            z-index: 250;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border: 2px solid var(--azul);
+            border-radius: 50%;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--azul);
+            height: 16px;
+            border-radius: 3px;
+        }
+
+        .slide-portada~.slide-dots .dot {
+            border-color: var(--blanco);
+        }
+
+        .slide-portada~.slide-dots .dot.active {
+            background: var(--blanco);
+        }
+
+        /* Ocultar scrollbars */
+        .slides-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Footer de cada Slide */
+        .slide-footer {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(29, 42, 107, 0.1);
+            padding-top: 0.3rem;
+            opacity: 0.8;
+        }
+
+        .slide-portada .slide-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .slide {
+                padding: 2.5rem 8rem;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+
+            .slide-title {
+                font-size: 2.6rem;
+            }
+
+            .module-name {
+                font-size: 1rem;
+            }
+
+            .module-desc {
+                font-size: 0.85rem;
+            }
+
+            .budget-table {
+                font-size: 0.85rem;
+            }
+
+            .terms-title {
+                font-size: 0.9rem;
+            }
+
+            .terms-text {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-height: 740px) {
+            .slide {
+                padding: 0.8rem 1rem 0.8rem 2.8rem;
+            }
+
+            .logo-portada {
+                font-size: 2.4rem;
+            }
+
+            .info-portada {
+                gap: 0.6rem;
+            }
+
+            .meta-label {
+                font-size: 1.1rem;
+            }
+
+            .meta-value {
+                font-size: 1rem;
+            }
+
+            .slide-title {
+                font-size: 1.6rem;
+                margin-bottom: 0.1rem;
+            }
+
+            .module-list {
+                gap: 0.3rem;
+            }
+
+            .module-card {
+                padding: 0.35rem 0.6rem;
+            }
+
+            .module-name {
+                font-size: 0.78rem;
+            }
+
+            .module-desc {
+                font-size: 0.66rem;
+            }
+
+            .tech-grid {
+                gap: 0.3rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .tech-badge {
+                padding: 0.2rem;
+                font-size: 0.62rem;
+            }
+
+            .budget-table {
+                font-size: 0.65rem;
+                margin-top: 0.1rem;
+            }
+
+            .budget-table th,
+            .budget-table td {
+                padding: 0.15rem 0.3rem;
+            }
+
+            .terms-container {
+                max-height: 48dvh;
+                gap: 0.35rem;
+            }
+
+            .terms-text {
+                font-size: 0.62rem;
+            }
+        }
+
+        .bg-icon-deco {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 280px;
+            height: auto;
+            opacity: 0.06;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Dots de navegación -->
+    <div class="slide-dots" id="dots-container">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <!-- Botones de navegación -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="navigate(1)"><i class="fa-solid fa-chevron-down"></i></button>
+    </div>
+
+    <div class="slides-container" id="slides-wrapper" onscroll="updateDots()">
+
+        <!-- Slide 1: Portada -->
+        <section class="slide slide-portada">
+            <div class="logo-portada">AMWEB.VIP</div>
+
+            <div class="info-portada">
+                <div>
+                    <div class="meta-label">Proyecto:</div>
+                    <div class="meta-value">SOLOCARROS/AUTOVENTAS</div>
+                </div>
+                <div>
+                    <div class="meta-label">Tipo de Proyecto:</div>
+                    <div class="meta-value">ECOSISTEMA DE VENTAS MULTIUSUARIO IOS/ANDROID</div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>DESLIZA PARA CONTINUAR</span>
+            </div>
+        </section>
+
+        <!-- Slide 2: Módulos Apps -->
+        <section class="slide slide-content">
+            <img src="../../assets/cohete.svg" class="bg-icon-deco" alt="Deco">
+            <div class="slide-header">
+                <span class="slide-logo">AMWEB.VIP</span>
+                <span class="slide-tag"><i class="fa-solid fa-mobile-screen-button"></i> MÓDULO APPS</span>
+            </div>
+
+            <div class="slide-body">
+                <h2 class="slide-title"><i class="fa-solid fa-mobile-screen-button"></i> APLICACIÓN MÓVIL</h2>
+                <div class="module-list">
+                    <div class="module-card">
+                        <i class="fa-solid fa-shield-halved module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Acceso e Identidad</div>
+                            <div class="module-desc">Splash screen, inicio de sesión, recuperación de cuenta y registro
+                                biométrico.</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-magnifying-glass module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Navegación del Usuario</div>
+                            <div class="module-desc">Feed de vehículos, motor de búsqueda inteligente con filtros
+                                (marca, modelo, año) y vista detallada.</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-square-plus module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Flujo del Vendedor</div>
+                            <div class="module-desc">Formulario de publicación con carga de cámara, gestión de
+                                inventario y estatus de anuncios.</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-user-gear module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Ajustes y Perfil</div>
+                            <div class="module-desc">Gestión de datos personales, historial de notificaciones y
+                                configuración de cuenta.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>SOLOCARROS</span>
+            </div>
+        </section>
+
+        <!-- Slide 3: Módulo Administrativo -->
+        <section class="slide slide-content">
+            <img src="../../assets/robot.svg" class="bg-icon-deco" alt="Deco">
+            <div class="slide-header">
+                <span class="slide-logo">AMWEB.VIP</span>
+                <span class="slide-tag"><i class="fa-solid fa-gears"></i> MÓDULO ADMIN</span>
+            </div>
+
+            <div class="slide-body">
+                <h2 class="slide-title"><i class="fa-solid fa-gears"></i> PANEL ADMINISTRATIVO</h2>
+                <div class="module-list">
+                    <div class="module-card">
+                        <i class="fa-solid fa-chart-line module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Dashboard</div>
+                            <div class="module-desc">Panel de control con métricas globales, actividad reciente y
+                                monitoreo de estados del sistema.</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-users-gear module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Gestión de Usuarios</div>
+                            <div class="module-desc">Listado, supervisión y validación manual de perfiles (verificación
+                                de identidad).</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-file-invoice module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Administración de Publicaciones</div>
+                            <div class="module-desc">Auditoría y control de inventario (publicaciones activas,
+                                pendientes y vencidas).</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-credit-card module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Módulo Transaccional</div>
+                            <div class="module-desc">Revisión y aprobación de comprobantes de pago para activación
+                                inmediata de anuncios.</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-rectangle-ad module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Publicidad</div>
+                            <div class="module-desc">Gestión de espacios publicitarios, carga de banners promocionales y
+                                control de rotación.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>SOLOCARROS</span>
+            </div>
+        </section>
+
+        <!-- Slide 4: Detalles Técnicos & Presupuesto -->
+        <section class="slide slide-content">
+            <img src="../../assets/sistema_solar.svg" class="bg-icon-deco" alt="Deco">
+            <div class="slide-header">
+                <span class="slide-logo">AMWEB.VIP</span>
+                <span class="slide-tag"><i class="fa-solid fa-file-invoice-dollar"></i> PRESUPUESTO</span>
+            </div>
+
+            <div class="slide-body">
+                <h2 class="slide-title"><i class="fa-solid fa-circle-info"></i> PRESUPUESTO Y TECNOLOGÍA</h2>
+
+                <div class="tech-grid">
+                    <div class="tech-badge"><i class="fa-brands fa-html5"></i> HTML5/CSS3/JS</div>
+                    <div class="tech-badge"><i class="fa-solid fa-server"></i> PHP/MySQL/PDO</div>
+                    <div class="tech-badge"><i class="fa-solid fa-mobile-screen"></i> Flutter / React Native</div>
+                    <div class="tech-badge"><i class="fa-brands fa-react"></i> React.js</div>
+                    <div class="tech-badge"><i class="fa-solid fa-fire"></i> Firebase </div>
+                    <div class="tech-badge"><i class="fa-solid fa-calendar-days"></i> 90 Días Entrega</div>
+                </div>
+
+                <table class="budget-table">
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th class="price-col">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Creación de Marca para App (Logo, Colores, Botones)</td>
+                            <td class="price-col">$400.00</td>
+                        </tr>
+                        <tr>
+                            <td>Desarrollo de la Base de Datos MySQL (Estándares de Ciberseguridad)</td>
+                            <td class="price-col">$200.00</td>
+                        </tr>
+                        <tr>
+                            <td>Programación Panel Administrativo (5 Módulos)</td>
+                            <td class="price-col">$900.00</td>
+                        </tr>
+                        <tr>
+                            <td>Programación App Móvil iPhone (4 Módulos)</td>
+                            <td class="price-col">$800.00</td>
+                        </tr>
+                        <tr>
+                            <td>Programación App Móvil Android (4 Módulos)</td>
+                            <td class="price-col">$600.00</td>
+                        </tr>
+                        <tr>
+                            <td>Módulo de Seguridad (Biometría y Cédula)</td>
+                            <td class="price-col">$500.00</td>
+                        </tr>
+                        <tr>
+                            <td>Despliegue a las tiendas Primera Vez</td>
+                            <td class="price-col">$300.00</td>
+                        </tr>
+                        <tr>
+                            <td>Total Propuesta</td>
+                            <td class="price-col">$3,700.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="slide-footer">
+                <span>SOLOCARROS</span>
+            </div>
+        </section>
+
+        <!-- Slide 5: Términos y Condiciones -->
+        <section class="slide slide-content">
+            <img src="../../assets/estrella_fugaz.svg" class="bg-icon-deco" alt="Deco">
+            <div class="slide-header">
+                <span class="slide-logo">AMWEB.VIP</span>
+                <span class="slide-tag"><i class="fa-solid fa-scale-balanced"></i> CONDICIONES</span>
+            </div>
+
+            <div class="slide-body">
+                <h2 class="slide-title"><i class="fa-solid fa-handshake-angle"></i> TÉRMINOS DE SERVICIO</h2>
+                <div class="terms-container">
+                    <div class="terms-block">
+                        <i class="fa-solid fa-copyright terms-icon"></i>
+                        <div class="terms-content">
+                            <div class="terms-title">Propiedad Intelectual</div>
+                            <div class="terms-text">El código fuente, diseño y arquitectura son propiedad del
+                                desarrollador hasta la cancelación total de los honorarios. Tras el pago final, los
+                                derechos de uso sobre el producto terminado se transfieren al cliente.</div>
+                        </div>
+                    </div>
+                    <div class="terms-block">
+                        <i class="fa-solid fa-store terms-icon"></i>
+                        <div class="terms-content">
+                            <div class="terms-title">Gestión de Tiendas y Mantenimiento</div>
+                            <div class="terms-text">El cliente abonará una cuota anual de $100.00 USD por concepto de
+                                mantenimiento de presencia y gestión integral de las aplicaciones en App Store y Google
+                                Play. Este monto incluye las membresías exigidas por ambas plataformas. Este valor es
+                                vigente a la fecha de emisión y podrá ajustarse anualmente según variaciones en los
+                                costos operativos o tarifas impuestas por Apple y Google. Esta cuota no incluye el
+                                desarrollo de actualizaciones, nuevas funcionalidades ni cambios de diseño; estos
+                                servicios serán presupuestados por separado.</div>
+                        </div>
+                    </div>
+                    <div class="terms-block">
+                        <i class="fa-solid fa-user-shield terms-icon"></i>
+                        <div class="terms-content">
+                            <div class="terms-title">Garantía y Soporte Técnico</div>
+                            <div class="terms-text">El proyecto incluye 3 meses de soporte gratuito tras el despliegue.
+                                Este periodo cubre exclusivamente la corrección de errores de programación (bugs). Se
+                                establecen 4 semanas de periodo de estabilización tras el lanzamiento, las cuales forman
+                                parte de los 3 meses de garantía. Al finalizar este periodo, el soporte técnico será
+                                opcional y se formalizará mediante un nuevo contrato de fee mensual.</div>
+                        </div>
+                    </div>
+                    <div class="terms-block">
+                        <i class="fa-solid fa-clock terms-icon"></i>
+                        <div class="terms-content">
+                            <div class="terms-title">Gestión y Disponibilidad</div>
+                            <div class="terms-text">Los tiempos de revisión, aprobación o rechazo de Apple o Google son
+                                externos al control del desarrollador y no son imputables a su responsabilidad. El
+                                desarrollador se compromete a responder solicitudes de soporte técnico en un plazo
+                                máximo de 48 horas hábiles tras la recepción de un reporte formal.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>SOLOCARROS</span>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const wrapper = document.getElementById('slides-wrapper');
+        const dots = document.querySelectorAll('.dot');
+        const navBtn = document.querySelector('.nav-btn');
+        const navIcon = navBtn.querySelector('i');
+
+        function updateDots() {
+            const slideHeight = wrapper.clientHeight;
+            const scrollPosition = wrapper.scrollTop;
+            const currentSlide = Math.round(scrollPosition / slideHeight);
+
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            if (currentSlide === dots.length - 1) {
+                navIcon.className = 'fa-solid fa-chevron-up';
+            } else {
+                navIcon.className = 'fa-solid fa-chevron-down';
+            }
+        }
+
+        function navigate() {
+            const slideHeight = wrapper.clientHeight;
+            const scrollPosition = wrapper.scrollTop;
+            const currentSlide = Math.round(scrollPosition / slideHeight);
+
+            let targetSlide = currentSlide;
+
+            if (currentSlide === dots.length - 1) {
+                targetSlide = 0;
+            } else {
+                targetSlide = currentSlide + 1;
+            }
+
+            wrapper.scrollTo({
+                top: targetSlide * slideHeight,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+
+</html>

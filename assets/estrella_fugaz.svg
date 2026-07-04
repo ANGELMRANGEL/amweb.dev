@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <!-- Star Core (Bright Yellow/Gold 4-pointed star) -->
+  <rect x="23" y="5" width="4" height="4" fill="#ffffff" />
+  <rect x="22" y="6" width="6" height="2" fill="#ffffff" />
+  <rect x="24" y="4" width="2" height="6" fill="#ffffff" />
+
+  <rect x="21" y="7" width="8" height="1" fill="#ffea00" />
+  <rect x="24" y="3" width="1" height="8" fill="#ffea00" />
+  <rect x="25" y="3" width="1" height="8" fill="#ffea00" />
+  
+  <rect x="23" y="6" width="1" height="1" fill="#ff9100" />
+  <rect x="26" y="6" width="1" height="1" fill="#ff9100" />
+  <rect x="23" y="7" width="1" height="1" fill="#ff9100" />
+  <rect x="26" y="7" width="1" height="1" fill="#ff9100" />
+
+  <!-- Trail (Sparkling retro path descending left/down) -->
+  <rect x="18" y="9" width="4" height="1" fill="#ffea00" />
+  <rect x="15" y="11" width="4" height="1" fill="#ff9100" />
+  <rect x="12" y="13" width="4" height="1" fill="#ff3d00" />
+  <rect x="9" y="15" width="4" height="1" fill="#2979ff" />
+  <rect x="6" y="17" width="4" height="1" fill="#1d2a6b" />
+
+  <rect x="19" y="8" width="3" height="1" fill="#ffffff" />
+  <rect x="16" y="10" width="3" height="1" fill="#ffea00" />
+  <rect x="13" y="12" width="3" height="1" fill="#ff9100" />
+  <rect x="10" y="14" width="3" height="1" fill="#ff3d00" />
+  <rect x="7" y="16" width="3" height="1" fill="#2979ff" />
+  <rect x="4" y="18" width="3" height="1" fill="#1d2a6b" />
+
+  <!-- Floating Sparkles -->
+  <rect x="14" y="8" width="1" height="1" fill="#ffffff" opacity="0.6" />
+  <rect x="10" y="10" width="1" height="1" fill="#ffea00" opacity="0.6" />
+  <rect x="6" y="14" width="1" height="1" fill="#ff9100" opacity="0.5" />
+  <rect x="2" y="18" width="1" height="1" fill="#2979ff" opacity="0.4" />
+</svg>

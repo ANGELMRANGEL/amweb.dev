@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <!-- Outer space details around rocket (dots) -->
+  <rect x="5" y="3" width="1" height="1" fill="#ffffff" opacity="0.3" />
+  <rect x="26" y="8" width="1" height="1" fill="#ffffff" opacity="0.5" />
+  <rect x="4" y="22" width="1" height="1" fill="#ffffff" opacity="0.3" />
+
+  <!-- Nose Cone (Red/Orange gradient) -->
+  <rect x="15" y="2" width="2" height="2" fill="#d32f2f" />
+  <rect x="14" y="4" width="4" height="2" fill="#f44336" />
+  <rect x="13" y="6" width="6" height="2" fill="#ff5722" />
+
+  <!-- Body (White/Gray shading) -->
+  <rect x="12" y="8" width="8" height="2" fill="#eeeeee" />
+  <!-- Left shadow -->
+  <rect x="12" y="8" width="1" height="14" fill="#cccccc" />
+  <!-- Main white body -->
+  <rect x="13" y="8" width="6" height="14" fill="#ffffff" />
+  <rect x="19" y="8" width="1" height="14" fill="#e0e0e0" /> <!-- Right shadow -->
+  
+  <rect x="11" y="10" width="10" height="12" fill="#ffffff" />
+  <rect x="11" y="10" width="1" height="12" fill="#cccccc" />
+  <rect x="20" y="10" width="1" height="12" fill="#e0e0e0" />
+
+  <!-- Visor Window (Circular detailed glass) -->
+  <rect x="14" y="11" width="4" height="4" fill="#111111" />
+  <rect x="13" y="12" width="6" height="2" fill="#111111" />
+  <rect x="14" y="12" width="4" height="2" fill="#00e5ff" />
+  <rect x="15" y="12" width="1" height="1" fill="#ffffff" /> <!-- Reflection -->
+
+  <!-- Horizontal Stripe (Blue) -->
+  <rect x="11" y="16" width="10" height="2" fill="#1d2a6b" />
+  <rect x="12" y="16" width="8" height="2" fill="#2979ff" />
+
+  <!-- Wings/Fins (Red/Black outline) -->
+  <rect x="9" y="18" width="2" height="6" fill="#d32f2f" />
+  <rect x="8" y="20" width="1" height="4" fill="#d32f2f" />
+  <rect x="7" y="22" width="1" height="3" fill="#ff5722" />
+  <rect x="6" y="24" width="1" height="2" fill="#ff9100" />
+
+  <rect x="21" y="18" width="2" height="6" fill="#d32f2f" />
+  <rect x="23" y="20" width="1" height="4" fill="#d32f2f" />
+  <rect x="24" y="22" width="1" height="3" fill="#ff5722" />
+  <rect x="25" y="24" width="1" height="2" fill="#ff9100" />
+
+  <!-- Engine nozzle -->
+  <rect x="13" y="24" width="6" height="2" fill="#424242" />
+  <rect x="14" y="26" width="4" height="1" fill="#212121" />
+
+  <!-- Flames (Multi-colored detailed fire) -->
+  <rect x="14" y="27" width="4" height="1" fill="#ff3d00" />
+  <rect x="13" y="28" width="6" height="1" fill="#ff9100" />
+  <rect x="14" y="29" width="4" height="1" fill="#ffea00" />
+  <rect x="15" y="30" width="2" height="2" fill="#ffffff" />
+  <rect x="12" y="28" width="1" height="1" fill="#ff3d00" />
+  <rect x="19" y="28" width="1" height="1" fill="#ff3d00" />
+</svg>

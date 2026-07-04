@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRESUPUESTO 69</title>
+    <meta name="description" content="PLATAFORMAS TECNOLÓGICAS A TU MEDIDA">
+    <meta property="og:title" content="PRESUPUESTO 69">
+    <meta property="og:description" content="PLATAFORMAS TECNOLÓGICAS A TU MEDIDA">
+    <meta property="og:image" content="https://amweb.vip/cotizaciones/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --azul: #1d2a6b;
+            --blanco: #ffffff;
+            --gris: #f4f5f8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--blanco);
+            color: var(--azul);
+            height: 100dvh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Contenedor de Slides */
+        .slides-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            height: 100%;
+            width: 100%;
+        }
+
+        .slide {
+            scroll-snap-align: start;
+            min-height: 100dvh;
+            max-height: 100dvh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.2rem 1.2rem 1.2rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Estilos Slide 1: Portada (Azul) */
+        .slide-portada {
+            background-color: var(--azul);
+            color: var(--blanco);
+        }
+
+        .logo-portada {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 3rem;
+            text-align: right;
+        }
+
+        .logo-portada i {
+            margin-right: 0.5rem;
+            font-size: 2.4rem;
+        }
+
+        .info-portada {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-label {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .meta-value {
+            font-weight: 400;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        /* Estilos Generales Slides de Contenido (Fondo Blanco) */
+        .slide-content {
+            background-color: var(--blanco);
+            color: var(--azul);
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--azul);
+            padding-bottom: 0.3rem;
+        }
+
+        .slide-logo {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 2rem;
+            text-decoration: none;
+            color: var(--azul);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .slide-tag {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 1.1rem;
+            background-color: var(--azul);
+            color: var(--blanco);
+            padding: 0.1rem 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0.8rem 0;
+            gap: 0.6rem;
+            overflow: hidden;
+        }
+
+        .slide-title {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        /* Módulos */
+        .module-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .module-card {
+            border: 2px solid var(--azul);
+            padding: 0.5rem 0.8rem;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+
+        .module-card-icon {
+            font-size: 1rem;
+            margin-top: 0.1rem;
+        }
+
+        .module-card-content {
+            flex: 1;
+        }
+
+        .module-name {
+            font-weight: 800;
+            font-size: 0.85rem;
+            margin-bottom: 0.1rem;
+            text-transform: uppercase;
+        }
+
+        .module-desc {
+            font-size: 0.72rem;
+            opacity: 0.9;
+            line-height: 1.25;
+        }
+
+        /* Detalles Técnicos y Presupuesto */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .tech-badge {
+            border: 1px solid var(--azul);
+            padding: 0.3rem;
+            font-size: 0.7rem;
+            text-align: center;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.72rem;
+            margin-top: 0.2rem;
+        }
+
+        .budget-table th {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 1.1rem;
+            text-align: left;
+            background: var(--azul);
+            color: var(--blanco);
+            padding: 0.3rem;
+        }
+
+        .budget-table td {
+            padding: 0.3rem;
+            border-bottom: 1px solid rgba(29, 42, 107, 0.2);
+        }
+
+        .budget-table tr:last-child td {
+            font-weight: 800;
+            border-bottom: 2px solid var(--azul);
+        }
+
+        .price-col {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Términos */
+        .terms-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 52dvh;
+            overflow-y: auto;
+            padding-right: 0.2rem;
+        }
+
+        .terms-block {
+            border-left: 2px solid var(--azul);
+            padding-left: 0.6rem;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+
+        .terms-icon {
+            font-size: 0.95rem;
+            margin-top: 0.1rem;
+        }
+
+        .terms-content {
+            flex: 1;
+        }
+
+        .terms-title {
+            font-weight: 800;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            margin-bottom: 0.1rem;
+        }
+
+        .terms-text {
+            font-size: 0.68rem;
+            line-height: 1.35;
+            opacity: 0.95;
+        }
+
+        /* Navegación Fija */
+        .nav-controls {
+            position: fixed;
+            bottom: 1.2rem;
+            right: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            z-index: 250;
+        }
+
+        .nav-btn {
+            background-color: var(--azul);
+            color: var(--blanco);
+            border: 2px solid var(--blanco);
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--blanco);
+            color: var(--azul);
+            border-color: var(--azul);
+        }
+
+        /* Indicador de progreso / Slide indicator */
+        .slide-dots {
+            position: fixed;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            z-index: 250;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border: 2px solid var(--azul);
+            border-radius: 50%;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--azul);
+            height: 16px;
+            border-radius: 3px;
+        }
+
+        .slide-portada~.slide-dots .dot {
+            border-color: var(--blanco);
+        }
+
+        .slide-portada~.slide-dots .dot.active {
+            background: var(--blanco);
+        }
+
+        /* Ocultar scrollbars */
+        .slides-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Footer de cada Slide */
+        .slide-footer {
+            font-family: 'Jersey 10', sans-serif;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(29, 42, 107, 0.1);
+            padding-top: 0.3rem;
+            opacity: 0.8;
+        }
+
+        .slide-portada .slide-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .slide {
+                padding: 2.5rem 8rem;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+
+            .slide-title {
+                font-size: 2.6rem;
+            }
+
+            .module-name {
+                font-size: 1rem;
+            }
+
+            .module-desc {
+                font-size: 0.85rem;
+            }
+
+            .budget-table {
+                font-size: 0.85rem;
+            }
+
+            .terms-title {
+                font-size: 0.9rem;
+            }
+
+            .terms-text {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-height: 740px) {
+            .slide {
+                padding: 0.8rem 1rem 0.8rem 2.8rem;
+            }
+
+            .logo-portada {
+                font-size: 2.4rem;
+            }
+
+            .info-portada {
+                gap: 0.6rem;
+            }
+
+            .meta-label {
+                font-size: 1.1rem;
+            }
+
+            .meta-value {
+                font-size: 1rem;
+            }
+
+            .slide-title {
+                font-size: 1.6rem;
+                margin-bottom: 0.1rem;
+            }
+
+            .module-list {
+                gap: 0.3rem;
+            }
+
+            .module-card {
+                padding: 0.35rem 0.6rem;
+            }
+
+            .module-name {
+                font-size: 0.78rem;
+            }
+
+            .module-desc {
+                font-size: 0.66rem;
+            }
+
+            .tech-grid {
+                gap: 0.3rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .tech-badge {
+                padding: 0.2rem;
+                font-size: 0.62rem;
+            }
+
+            .budget-table {
+                font-size: 0.65rem;
+                margin-top: 0.1rem;
+            }
+
+            .budget-table th,
+            .budget-table td {
+                padding: 0.15rem 0.3rem;
+            }
+
+            .terms-container {
+                max-height: 48dvh;
+                gap: 0.35rem;
+            }
+
+            .terms-text {
+                font-size: 0.62rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Dots de navegación -->
+    <div class="slide-dots" id="dots-container">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <!-- Botones de navegación -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="navigate()"><i class="fa-solid fa-chevron-down"></i></button>
+    </div>
+
+    <div class="slides-container" id="slides-wrapper" onscroll="updateDots()">
+
+        <!-- Slide 1: Portada -->
+        <section class="slide slide-portada">
+            <div class="logo-portada">AMWEB.VIP</div>
+
+            <div class="slide-body">
+                <div class="info-portada">
+                    <div>
+                        <div class="meta-label">Proyecto:</div>
+                        <div class="meta-value">MUNDIAL 2026</div>
+                    </div>
+                    <div>
+                        <div class="meta-label">Tipo de Proyecto:</div>
+                        <div class="meta-value">Plataforma Web Interactiva y Gestión de Reservas</div>
+                    </div>
+                    <div>
+                        <div class="meta-label">Fecha:</div>
+                        <div class="meta-value">11 de junio de 2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>DESLIZA PARA CONTINUAR</span>
+            </div>
+        </section>
+
+        <!-- Slide 2: Base de Datos, Reservas y Acceso -->
+        <section class="slide slide-content">
+            <div class="slide-header">
+                <span class="slide-logo">AMWEB.VIP</span>
+                <span class="slide-tag"><i class="fa-solid fa-database"></i> INFRAESTRUCTURA & ACCESO</span>
+            </div>
+
+            <div class="slide-body">
+                <h2 class="slide-title"><i class="fa-solid fa-server"></i> BASE DE DATOS Y CONEXIÓN</h2>
+                <div class="module-list">
+                    <div class="module-card">
+                        <i class="fa-solid fa-database module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Arquitectura Híbrida</div>
+                            <div class="module-desc">Base de datos combinada MySQL + Firestore para alto rendimiento y
+                                sincronización en tiempo real.</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-link module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Integración de Reservas</div>
+                            <div class="module-desc">Conexión e integración directa con el módulo de reservas existente
+                                del Host del cliente.</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-key module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Inicio de Sesión con Google</div>
+                            <div class="module-desc">Integración nativa con OAuth 2.0 para un inicio de sesión rápido,
+                                seguro y sin fricciones.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>PROYECTO: MUNDIAL LA FELICITTA 2026</span>
+            </div>
+        </section>
+
+        <!-- Slide 3: Wallet y Quiniela -->
+        <section class="slide slide-content">
+            <div class="slide-header">
+                <span class="slide-logo">AMWEB.VIP</span>
+                <span class="slide-tag"><i class="fa-solid fa-wallet"></i> WALLET & QUINIELA</span>
+            </div>
+
+            <div class="slide-body">
+                <h2 class="slide-title"><i class="fa-solid fa-star"></i> Pases y Predicciones</h2>
+                <div class="module-list">
+                    <div class="module-card">
+                        <i class="fa-solid fa-qrcode module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Pases Digitales (Wallet)</div>
+                            <div class="module-desc">Generación de archivos .pkpass para Apple Wallet y pases
+                                interactivos para Google Wallet con QR dinámico.</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-trophy module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Quiniela Deportiva (Prode)</div>
+                            <div class="module-desc">Motor de predicciones interactivas con cálculo automático de
+                                posiciones, puntajes y rankings dinámicos.</div>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <i class="fa-solid fa-clock module-card-icon"></i>
+                        <div class="module-card-content">
+                            <div class="module-name">Resultados en Tiempo Real</div>
+                            <div class="module-desc">Consumo e integración de API deportiva externa para marcadores y
+                                estadísticas en vivo del Mundial.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>PROYECTO: MUNDIAL LA FELICITTA 2026</span>
+            </div>
+        </section>
+
+        <!-- Slide 4: Detalles Técnicos & Presupuesto -->
+        <section class="slide slide-content">
+            <div class="slide-header">
+                <span class="slide-logo">AMWEB.VIP</span>
+                <span class="slide-tag"><i class="fa-solid fa-file-invoice-dollar"></i> PRESUPUESTO</span>
+            </div>
+
+            <div class="slide-body">
+                <h2 class="slide-title"><i class="fa-solid fa-circle-info"></i> INVERSIÓN Y TECNOLOGÍA</h2>
+
+                <div class="tech-grid">
+                    <div class="tech-badge"><i class="fa-solid fa-code"></i> PHP 8.4 Nativo / OOP</div>
+                    <div class="tech-badge"><i class="fa-solid fa-database"></i> MySQL + Firestore</div>
+                    <div class="tech-badge"><i class="fa-solid fa-wallet"></i> Apple & Google Wallet</div>
+                    <div class="tech-badge"><i class="fa-solid fa-key"></i> OAuth 2.0 / JWT / BCRYPT</div>
+                    <div class="tech-badge"><i class="fa-solid fa-shield-halved"></i> Seguridad XSS/SQLi</div>
+                    <div class="tech-badge"><i class="fa-solid fa-clock"></i> API Deportiva en Vivo</div>
+                </div>
+
+                <table class="budget-table">
+                    <thead>
+                        <tr>
+                            <th>Concepto / Módulo</th>
+                            <th class="price-col">Costo (USD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Base de Datos MySQL + Firestore</td>
+                            <td class="price-col">$90.00</td>
+                        </tr>
+                        <tr>
+                            <td>Integración a Reservas / Host</td>
+                            <td class="price-col">$80.00</td>
+                        </tr>
+                        <tr>
+                            <td>Sistema de Generación de Pases Wallet Apple y Google</td>
+                            <td class="price-col">$120.00</td>
+                        </tr>
+                        <tr>
+                            <td>Módulo Inicio de Sesión con Google</td>
+                            <td class="price-col">$100.00</td>
+                        </tr>
+                        <tr>
+                            <td>Módulo Quiniela Predicción / Resultados en Tiempo Real</td>
+                            <td class="price-col">$150.00</td>
+                        </tr>
+                        <tr>
+                            <td>Desarrollo completo llave en mano</td>
+                            <td class="price-col">$540.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="slide-footer">
+                <span>PROYECTO: MUNDIAL LA FELICITTA 2026 <i class="fa-solid fa-file-pdf" style="cursor: pointer; opacity: 0.4; font-size: 1.1rem; margin-left: 8px; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.4" onclick="downloadPDF()" title="Descargar PDF"></i></span>
+            </div>
+        </section>
+
+        <!-- Slide 5: Términos y Condiciones -->
+        <section class="slide slide-content">
+            <div class="slide-header">
+                <span class="slide-logo">AMWEB.VIP</span>
+                <span class="slide-tag"><i class="fa-solid fa-scale-balanced"></i> CONDICIONES</span>
+            </div>
+
+            <div class="slide-body">
+                <h2 class="slide-title"><i class="fa-solid fa-handshake-angle"></i> TÉRMINOS DE SERVICIO</h2>
+                <div class="terms-container">
+                    <div class="terms-block">
+                        <i class="fa-solid fa-copyright terms-icon"></i>
+                        <div class="terms-content">
+                            <div class="terms-title">Propiedad Intelectual</div>
+                            <div class="terms-text">El código fuente, diseño, arquitectura y lógica de negocio son
+                                propiedad exclusiva del desarrollador hasta la cancelación total de los honorarios.
+                                Completado el pago, se transfieren los derechos de uso al cliente.</div>
+                        </div>
+                    </div>
+                    <div class="terms-block">
+                        <i class="fa-solid fa-credit-card terms-icon"></i>
+                        <div class="terms-content">
+                            <div class="terms-title">Forma de Pago</div>
+                            <div class="terms-text">50% al inicio de actividades y 50% contra entrega final, validación
+                                funcional y despliegue del proyecto.</div>
+                        </div>
+                    </div>
+                    <div class="terms-block">
+                        <i class="fa-solid fa-cloud-arrow-up terms-icon"></i>
+                        <div class="terms-content">
+                            <div class="terms-title">Requerimientos de Infraestructura</div>
+                            <div class="terms-text">El cliente facilitará accesos a Apple Developer y Google Cloud
+                                Console. El desarrollador no se responsabiliza por retrasos de revisión de terceros
+                                (Apple/Google).</div>
+                        </div>
+                    </div>
+                    <div class="terms-block">
+                        <i class="fa-solid fa-user-shield terms-icon"></i>
+                        <div class="terms-content">
+                            <div class="terms-title">Mantenimiento y Garantía</div>
+                            <div class="terms-text">Se incluye un periodo de 30 días naturales de garantía tras el
+                                despliegue final para la corrección de errores de programación (bugs). No cubre cambios
+                                de requerimientos ni nuevas funcionalidades.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-footer">
+                <span>PROYECTO: MUNDIAL LA FELICITTA 2026</span>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const wrapper = document.getElementById('slides-wrapper');
+        const dots = document.querySelectorAll('.dot');
+        const navBtn = document.querySelector('.nav-btn');
+        const navIcon = navBtn.querySelector('i');
+
+        function updateDots() {
+            const slideHeight = wrapper.clientHeight;
+            const scrollPosition = wrapper.scrollTop;
+            const currentSlide = Math.round(scrollPosition / slideHeight);
+
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            if (currentSlide === dots.length - 1) {
+                navIcon.className = 'fa-solid fa-chevron-up';
+            } else {
+                navIcon.className = 'fa-solid fa-chevron-down';
+            }
+        }
+
+        function navigate() {
+            const slideHeight = wrapper.clientHeight;
+            const scrollPosition = wrapper.scrollTop;
+            const currentSlide = Math.round(scrollPosition / slideHeight);
+
+            let targetSlide = currentSlide;
+
+            if (currentSlide === dots.length - 1) {
+                targetSlide = 0;
+            } else {
+                targetSlide = currentSlide + 1;
+            }
+
+            wrapper.scrollTo({
+                top: targetSlide * slideHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        function downloadPDF() {
+            const element = document.createElement('div');
+            element.style.width = '8.5in';
+            element.style.height = '11in';
+            element.style.padding = '0.8in';
+            element.style.boxSizing = 'border-box';
+            element.style.backgroundColor = '#ffffff';
+            element.style.color = '#1d2a6b';
+            element.style.fontFamily = "'Outfit', sans-serif";
+            element.style.display = 'flex';
+            element.style.flexDirection = 'column';
+            element.style.justifyContent = 'space-between';
+            element.style.position = 'relative';
+
+            element.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #1d2a6b; padding-bottom: 0.5rem; margin-bottom: 1.5rem;">
+                    <span style="font-family: 'Jersey 10', sans-serif; font-size: 2.5rem;">AMWEB.VIP</span>
+                    <span style="font-family: 'Jersey 10', sans-serif; font-size: 1.5rem; background-color: #1d2a6b; color: #ffffff; padding: 0.2rem 0.6rem; display: flex; align-items: center; gap: 0.3rem;">
+                        <i class="fa-solid fa-file-invoice-dollar"></i> PRESUPUESTO
+                    </span>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 1.5rem;">
+                    <h2 style="font-family: 'Jersey 10', sans-serif; font-size: 2.8rem; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; line-height: 1;">
+                        <i class="fa-solid fa-circle-info"></i> INVERSIÓN Y TECNOLOGÍA
+                    </h2>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1.5rem;">
+                        <div style="border: 1.5px solid #1d2a6b; padding: 0.6rem; font-size: 0.9rem; text-align: center; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.5rem;"><i class="fa-solid fa-code"></i> PHP 8.4 Nativo / OOP</div>
+                        <div style="border: 1.5px solid #1d2a6b; padding: 0.6rem; font-size: 0.9rem; text-align: center; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.5rem;"><i class="fa-solid fa-database"></i> MySQL + Firestore</div>
+                        <div style="border: 1.5px solid #1d2a6b; padding: 0.6rem; font-size: 0.9rem; text-align: center; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.5rem;"><i class="fa-solid fa-wallet"></i> Apple & Google Wallet</div>
+                        <div style="border: 1.5px solid #1d2a6b; padding: 0.6rem; font-size: 0.9rem; text-align: center; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.5rem;"><i class="fa-solid fa-key"></i> OAuth 2.0 / JWT / BCRYPT</div>
+                        <div style="border: 1.5px solid #1d2a6b; padding: 0.6rem; font-size: 0.9rem; text-align: center; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.5rem;"><i class="fa-solid fa-shield-halved"></i> Seguridad XSS/SQLi</div>
+                        <div style="border: 1.5px solid #1d2a6b; padding: 0.6rem; font-size: 0.9rem; text-align: center; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.5rem;"><i class="fa-solid fa-clock"></i> API Deportiva en Vivo</div>
+                    </div>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem; margin-top: 1rem;">
+                        <thead>
+                            <tr style="background-color: #1d2a6b; color: #ffffff;">
+                                <th style="font-family: 'Jersey 10', sans-serif; font-size: 1.4rem; text-align: left; padding: 0.6rem 0.8rem;">Concepto / Módulo</th>
+                                <th style="font-family: 'Jersey 10', sans-serif; font-size: 1.4rem; text-align: right; padding: 0.6rem 0.8rem; width: 150px;">Costo (USD)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(29, 42, 107, 0.2);"><td style="padding: 0.6rem 0.8rem;">Base de Datos MySQL + Firestore</td><td style="padding: 0.6rem 0.8rem; text-align: right; font-weight: 600;">$90.00</td></tr>
+                            <tr style="border-bottom: 1px solid rgba(29, 42, 107, 0.2);"><td style="padding: 0.6rem 0.8rem;">Integración a Reservas / Host</td><td style="padding: 0.6rem 0.8rem; text-align: right; font-weight: 600;">$80.00</td></tr>
+                            <tr style="border-bottom: 1px solid rgba(29, 42, 107, 0.2);"><td style="padding: 0.6rem 0.8rem;">Sistema de Generación de Pases Wallet Apple y Google</td><td style="padding: 0.6rem 0.8rem; text-align: right; font-weight: 600;">$120.00</td></tr>
+                            <tr style="border-bottom: 1px solid rgba(29, 42, 107, 0.2);"><td style="padding: 0.6rem 0.8rem;">Módulo Inicio de Sesión con Google</td><td style="padding: 0.6rem 0.8rem; text-align: right; font-weight: 600;">$100.00</td></tr>
+                            <tr style="border-bottom: 1px solid rgba(29, 42, 107, 0.2);"><td style="padding: 0.6rem 0.8rem;">Módulo Quiniela Predicción / Resultados en Tiempo Real</td><td style="padding: 0.6rem 0.8rem; text-align: right; font-weight: 600;">$150.00</td></tr>
+                            <tr style="border-bottom: 3px solid #1d2a6b; font-weight: 800; background-color: rgba(29, 42, 107, 0.05);"><td style="padding: 0.8rem 0.8rem;">Desarrollo completo llave en mano</td><td style="padding: 0.8rem 0.8rem; text-align: right; font-weight: 800; font-size: 1.1rem;">$540.00</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="font-family: 'Jersey 10', sans-serif; font-size: 1.4rem; display: flex; justify-content: space-between; align-items: center; border-top: 2px solid rgba(29, 42, 107, 0.2); padding-top: 0.5rem; margin-top: 1.5rem; opacity: 0.9;">
+                    <span>PROYECTO: MUNDIAL LA FELICITTA 2026</span>
+                    <span>VIGENCIA: 30 DÍAS NATURALES</span>
+                </div>
+            `;
+
+            const opt = {
+                margin:       0,
+                filename:     'presupuesto_69_mundial_2026.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+</body>
+
+</html>
